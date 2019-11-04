@@ -8,7 +8,8 @@
   "scripts": {
     "build": "tsc",
     "lint": "eslint src/**/*.ts",
-    "lint:fix": "eslint --fix src/**/*.ts"
+    "lint:fix": "eslint --fix src/**/*.ts",
+    "precommit": "yarn lint:fix && yarn lint"
   },
   "dependencies": {
     "typescript": "^3.6.4"
