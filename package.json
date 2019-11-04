@@ -1,0 +1,8 @@
+{
+  "name": "moldify",
+  "version": "0.1.0",
+  "description": "mold object with schema",
+  "main": "dist/index.js",
+  "author": "tkdalic <himagami126@gmail.com>",
+  "license": "MIT"
+}
