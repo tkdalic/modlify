@@ -5,6 +5,11 @@
   "main": "dist/index.js",
   "author": "tkdalic <himagami126@gmail.com>",
   "license": "MIT",
+  "scripts": {
+    "build": "tsc",
+    "lint": "eslint src/**/*.ts",
+    "lint:fix": "eslint --fix src/**/*.ts"
+  },
   "dependencies": {
     "typescript": "^3.6.4"
   },
