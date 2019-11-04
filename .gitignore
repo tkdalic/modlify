@@ -1,0 +1,8 @@
+# publish
+dist/
+
+# node
+node_modules/
+
+# editor
+.vscode/
