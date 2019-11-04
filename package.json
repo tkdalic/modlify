@@ -8,7 +8,5 @@
   "dependencies": {
     "typescript": "^3.6.4"
   },
-  "devDependencies": {
-    "tslint": "^6.0.0-beta0"
-  }
+  "devDependencies": {}
 }
