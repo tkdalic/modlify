@@ -1,26 +1,28 @@
-export type Schema<T, K> = (target: T) => K;
+export type Schema = (target: any) => any;
+export type varSchema = Schema | Schema[];
 
-export function convert<T, K>(
-  target: T,
-  ...schema: Schema<T, K>[] | Schema<T, K>[][]
-): T | K {
-  const flatSchema: Schema<T, K>[] = (schema as Schema<T, K>[][]).reduce(
-    (result: any, element: any): Schema<T, K>[] => result.concat(element),
+function flatten<T>(target: (T | T[])[]): T[] {
+  return target.reduce(
+    (result: T[], element: T | T[]): T[] => result.concat(element),
     []
   );
+}
+
+export function convert(target: unknown, ...schema: varSchema[]): unknown {
+  const flatSchema = flatten(schema);
 
   if (flatSchema.length === 0) {
     return target;
   }
 
   return flatSchema.reduce(
-    (value: any, converter: any) => converter(value),
+    (value: any, converter: Schema): any => converter(value),
     target
   );
 }
 
-export function object(schema: any): any {
-  return (target: any) => {
+export function object(schema: { [key: string]: varSchema }): varSchema {
+  return (target: any): any => {
     const result: any = {};
     Object.keys(schema).forEach(
       key => (result[key] = convert(target[key], schema[key]))
@@ -29,7 +31,7 @@ export function object(schema: any): any {
   };
 }
 
-export function array(schema: any): any {
-  return (targets: any) =>
+export function array(schema: varSchema): varSchema {
+  return (targets: any): any =>
     targets.map((target: any) => convert(target, schema));
 }
